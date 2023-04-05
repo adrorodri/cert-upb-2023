@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Log
 
 class MainActivity : AppCompatActivity() {
-    var num = 1
     companion object {
         const val TAG = "MainActivity"
     }
@@ -13,9 +12,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(TAG, "Layout has loaded")
-
-        if (num == 2) {
-            Log.d(TAG, "Numero es 2")
-        }
     }
 }
