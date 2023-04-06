@@ -1,4 +1,4 @@
-package com.upb.certupb2023.mainscreen.fragments
+package com.upb.certupb2023.mainscreen.fragments.mystore
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

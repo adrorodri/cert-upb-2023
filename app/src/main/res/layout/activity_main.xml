@@ -56,19 +56,36 @@
         android:id="@+id/fragment_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/navbar"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="?attr/colorSecondary"
+        app:itemIconTint="?attr/colorOnSecondary"
+        app:itemTextColor="?attr/colorOnSecondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/main_bottom_nav_menu"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/navbar"
         android:layout_width="0dp"
         android:layout_height="80dp"
+        android:background="?attr/colorSecondary"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="?attr/colorSecondary">
+        app:layout_constraintStart_toStartOf="parent">
+
         <ImageButton
             android:id="@+id/btn_home"
             android:layout_width="70dp"
@@ -76,8 +93,8 @@
             android:layout_marginBottom="10dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="18dp"
-            android:src="@drawable/ic_home"
             android:scaleType="centerCrop"
+            android:src="@drawable/ic_home"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_my_store"
             app:layout_constraintHorizontal_bias="0.5"
@@ -123,8 +140,8 @@
             android:layout_height="wrap_content"
             android:text="Hello World!"
             android:textColor="?attr/colorOnPrimary"
-            app:layout_constraintEnd_toEndOf="@+id/btn_settings"
             app:layout_constraintBottom_toBottomOf="@+id/btn_settings"
+            app:layout_constraintEnd_toEndOf="@+id/btn_settings"
             app:layout_constraintStart_toStartOf="@+id/btn_settings" />
 
         <TextView
@@ -133,9 +150,9 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_my_store"
             app:layout_constraintEnd_toEndOf="@+id/btn_my_store"
-            app:layout_constraintStart_toStartOf="@+id/btn_my_store"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_my_store" />
+            app:layout_constraintStart_toStartOf="@+id/btn_my_store" />
 
         <TextView
             android:id="@+id/textView2"
@@ -143,9 +160,9 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_home"
             app:layout_constraintEnd_toEndOf="@+id/btn_home"
-            app:layout_constraintStart_toStartOf="@+id/btn_home"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_home" />
+            app:layout_constraintStart_toStartOf="@+id/btn_home" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

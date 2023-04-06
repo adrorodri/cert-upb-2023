@@ -1,60 +1,62 @@
 package com.upb.certupb2023.mainscreen
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageButton
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.upb.certupb2023.R
-import com.upb.certupb2023.mainscreen.fragments.HomeFragment
-import com.upb.certupb2023.mainscreen.fragments.MyStoreFragment
-import com.upb.certupb2023.mainscreen.fragments.SettingsFragment
+import com.upb.certupb2023.mainscreen.fragments.home.HomeFragment
+import com.upb.certupb2023.mainscreen.fragments.mystore.MyStoreFragment
+import com.upb.certupb2023.mainscreen.fragments.settings.SettingsFragment
+import removeLastFragment
+import replaceFragment
 
 class MainActivity : AppCompatActivity() {
 
-    val homeFragment = HomeFragment()
-    val myStoreFragment = MyStoreFragment()
-    val settingsFragment = SettingsFragment()
+    private val homeFragment = HomeFragment()
+    private val myStoreFragment = MyStoreFragment()
+    private val settingsFragment = SettingsFragment()
+
+    var backButton: OnBackPressedCallback? = null
 
     companion object {
         const val TAG = "MainActivity"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d(TAG, "onCreate")
 
-        val ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragment_container, homeFragment)
-        ft.commit()
+        supportFragmentManager.replaceFragment(homeFragment, R.id.fragment_container)
 
-        val btnHome = findViewById<ImageButton>(R.id.btn_home)
-        val btnMyStore = findViewById<ImageButton>(R.id.btn_my_store)
-        val btnSettings = findViewById<ImageButton>(R.id.btn_settings)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        btnHome.setOnClickListener {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragment_container, homeFragment)
-            ft.commit()
+        bottomNavigationView.setOnItemSelectedListener {
+            supportFragmentManager.replaceFragment(
+                when (it.itemId) {
+                    R.id.menu_item_home -> homeFragment
+                    R.id.menu_item_store -> myStoreFragment
+                    R.id.menu_item_settings -> settingsFragment
+                    else -> homeFragment
+                }, R.id.fragment_container
+            )
+            true
         }
-        btnMyStore.setOnClickListener {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragment_container, myStoreFragment)
-            ft.commit()
-        }
-        btnSettings.setOnClickListener {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.replace(R.id.fragment_container, settingsFragment)
-            ft.commit()
-        }
-    }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.fragments.size > 1) {
-            val ft = supportFragmentManager.beginTransaction()
-            ft.remove(supportFragmentManager.fragments.last())
-            ft.commit()
-        } else {
-            finish()
-        }
+        // Configurar Back Button con un comportamiento personalizado:
+        onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (homeFragment.isVisible && homeFragment.childFragmentManager.fragments.size > 1) {
+                        homeFragment.childFragmentManager.removeLastFragment()
+                    } else if (settingsFragment.isVisible || myStoreFragment.isVisible) {
+                        supportFragmentManager.replaceFragment(homeFragment, R.id.fragment_container)
+                    } else {
+                        finish()
+                    }
+                }
+            }
+        )
     }
 }
