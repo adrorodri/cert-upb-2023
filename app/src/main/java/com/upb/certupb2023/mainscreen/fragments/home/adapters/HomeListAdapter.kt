@@ -24,7 +24,7 @@ class HomeListAdapter(val itemList: List<HomeListItem>, val onItemClickListener:
 
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
         holder.tvTitle.text = itemList[position].title
-        holder.ivBackground.setImageResource(itemList[position].image)
+        Glide.with(holder.itemView).load(itemList[position].coverImageUrl).into(holder.ivBackground)
         Glide.with(holder.itemView).load(itemList[position].logoUrl).circleCrop().into(holder.ivLogo)
 
         itemList[position].tags.forEach { tag ->
