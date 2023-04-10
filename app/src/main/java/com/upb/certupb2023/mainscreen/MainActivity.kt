@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
     private val myStoreFragment = MyStoreFragment()
     private val settingsFragment = SettingsFragment()
 
-    var backButton: OnBackPressedCallback? = null
-
     companion object {
         const val TAG = "MainActivity"
     }
