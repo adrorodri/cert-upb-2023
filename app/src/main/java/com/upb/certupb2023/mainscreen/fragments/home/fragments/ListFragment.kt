@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.upb.certupb2023.R
 import com.upb.certupb2023.mainscreen.fragments.home.adapters.HomeListAdapter
 import com.upb.certupb2023.mainscreen.fragments.home.models.HomeListItem
@@ -23,7 +22,7 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,9 +48,7 @@ class ListFragment : Fragment() {
         )
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = HomeListAdapter(listItems) {
-            val ft = parentFragmentManager.beginTransaction()
-            ft.add(R.id.home_child_container, detailsFragment)
-            ft.commit()
+            view.findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
         }
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.upb.certupb2023.mainscreen.fragments.home.fragments.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details"/>
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.upb.certupb2023.mainscreen.fragments.home.fragments.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/myStoreFragment"
+        android:name="com.upb.certupb2023.mainscreen.fragments.mystore.MyStoreFragment"
+        android:label="MyStoreFragment"
+        tools:layout="@layout/fragment_my_store"/>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.upb.certupb2023.mainscreen.fragments.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings" />
+
+</navigation>
