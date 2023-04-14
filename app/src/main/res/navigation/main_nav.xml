@@ -9,7 +9,11 @@
         android:id="@+id/detailsFragment"
         android:name="com.upb.certupb2023.mainscreen.fragments.home.fragments.DetailsFragment"
         android:label="DetailsFragment"
-        tools:layout="@layout/fragment_details"/>
+        tools:layout="@layout/fragment_details">
+        <argument
+            android:name="homeListItem"
+            app:argType="com.upb.certupb2023.mainscreen.fragments.home.models.HomeListItem" />
+    </fragment>
 
     <fragment
         android:id="@+id/listFragment"

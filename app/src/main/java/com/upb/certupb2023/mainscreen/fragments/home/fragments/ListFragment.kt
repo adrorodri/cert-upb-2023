@@ -48,13 +48,16 @@ class ListFragment : Fragment() {
         )
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView.adapter = HomeListAdapter(listItems) {
-            view.findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
+            // Con SafeArgs (recomendado)
+            view.findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailsFragment(it))
+
+            // Sin SafeArgs, no tiene el argumento
+//            view.findNavController().navigate(R.id.action_listFragment_to_detailsFragment)
         }
         recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
 //        recyclerView.layoutManager = GridLayoutManager(context, 2)
-
 //        recyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     }
 }
