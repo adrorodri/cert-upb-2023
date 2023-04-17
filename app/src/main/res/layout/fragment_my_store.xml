@@ -3,13 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#55E3FC"
     tools:context=".mainscreen.fragments.home.fragments.ListFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/include2"
+        layout="@layout/toolbar_collapsed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:text="@string/hello_blank_fragment"
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

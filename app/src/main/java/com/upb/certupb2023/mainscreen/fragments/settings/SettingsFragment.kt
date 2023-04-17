@@ -1,18 +1,20 @@
 package com.upb.certupb2023.mainscreen.fragments.settings
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.upb.certupb2023.R
+import androidx.fragment.app.Fragment
+import com.upb.certupb2023.databinding.FragmentSettingsBinding
 
 class SettingsFragment : Fragment() {
+    lateinit var binding: FragmentSettingsBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_settings, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

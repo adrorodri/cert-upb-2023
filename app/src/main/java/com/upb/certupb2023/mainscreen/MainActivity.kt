@@ -1,19 +1,14 @@
 package com.upb.certupb2023.mainscreen
 
 import android.os.Bundle
-import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.upb.certupb2023.R
-import com.upb.certupb2023.mainscreen.fragments.home.HomeFragment
-import com.upb.certupb2023.mainscreen.fragments.mystore.MyStoreFragment
-import com.upb.certupb2023.mainscreen.fragments.settings.SettingsFragment
+import com.upb.certupb2023.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    lateinit var binding: ActivityMainBinding
 
     companion object {
         const val TAG = "MainActivity"
@@ -21,15 +16,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Vincular un bottom navigation view a un Nav Graph (forma simple)
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.setupWithNavController(navController)
+        val navController = binding.navHostFragment.getFragment<NavHostFragment>().navController
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         // Manejo manual del bottom navigation view (forma larga), saltar a cualquier parte del nav graph:
 
