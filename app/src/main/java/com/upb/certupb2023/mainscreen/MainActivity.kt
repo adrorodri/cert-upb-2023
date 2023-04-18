@@ -23,8 +23,6 @@ class MainActivity : AppCompatActivity() {
         val navController = binding.navHostFragment.getFragment<NavHostFragment>().navController
         binding.bottomNavigationView.setupWithNavController(navController)
 
-        binding
-
         // Manejo manual del bottom navigation view (forma larga), saltar a cualquier parte del nav graph:
 
 //        bottomNavigationView.setOnItemSelectedListener {

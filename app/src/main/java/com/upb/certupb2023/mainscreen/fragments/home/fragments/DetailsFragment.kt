@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentDetailsBinding
-import com.upb.certupb2023.mainscreen.fragments.home.models.Tag
+import com.upb.certupb2023.mainscreen.models.Tag
 
 class DetailsFragment: Fragment() {
 
@@ -31,6 +32,11 @@ class DetailsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.homeListItem = args.homeListItem
+
+
+
         // Ya podemos utilizar los argumentos en lo que necesitemos, como mostrarlos/actualizarlos en el UI
         Glide.with(view).load(args.homeListItem.coverImageUrl).into(binding.ivCover)
         Glide.with(view).load(args.homeListItem.logoUrl).circleCrop().into(binding.ivLogo)
@@ -45,6 +51,6 @@ class DetailsFragment: Fragment() {
             binding.lyTags.addView(tagView)
         }
 
-        binding.tvTitle.text = args.homeListItem.title
+//        binding.tvTitle.text = args.homeListItem.title
     }
 }

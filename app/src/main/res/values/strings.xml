@@ -13,4 +13,7 @@
     <string name="register_hint_email">Correo</string>
     <string name="register_hint_password">Contraseña</string>
     <string name="register_hint_password_confirm">Confirmar Contraseña</string>
+    <string name="register_toast_password_error">Passwords don\'t match!</string>
+    <string name="register_toast_password_empty">Password can\'t be empty!</string>
+    <string name="register_toast_user_empty">Username or email can\'t be empty!</string>
 </resources>

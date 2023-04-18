@@ -11,8 +11,8 @@ import com.bumptech.glide.Glide
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.HomeListItemBinding
 import com.upb.certupb2023.databinding.HomeListItemTagBinding
-import com.upb.certupb2023.mainscreen.fragments.home.models.HomeListItem
-import com.upb.certupb2023.mainscreen.fragments.home.models.Tag
+import com.upb.certupb2023.mainscreen.models.HomeListItem
+import com.upb.certupb2023.mainscreen.models.Tag
 
 class HomeListAdapter(val itemList: List<HomeListItem>, val onItemClickListener: (item: HomeListItem) -> Unit): RecyclerView.Adapter<HomeListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {

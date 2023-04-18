@@ -1,4 +1,4 @@
-package com.upb.certupb2023.mainscreen.fragments.home.models
+package com.upb.certupb2023.mainscreen.models
 
 import java.io.Serializable
 

@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_details">
         <argument
             android:name="homeListItem"
-            app:argType="com.upb.certupb2023.mainscreen.fragments.home.models.HomeListItem" />
+            app:argType="com.upb.certupb2023.mainscreen.models.HomeListItem" />
     </fragment>
 
     <fragment

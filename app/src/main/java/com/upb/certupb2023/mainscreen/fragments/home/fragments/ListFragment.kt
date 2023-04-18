@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentListBinding
 import com.upb.certupb2023.mainscreen.fragments.home.adapters.HomeListAdapter
-import com.upb.certupb2023.mainscreen.fragments.home.models.HomeListItem
-import com.upb.certupb2023.mainscreen.fragments.home.models.Tag
+import com.upb.certupb2023.mainscreen.models.HomeListItem
+import com.upb.certupb2023.mainscreen.models.Tag
 
 class ListFragment : Fragment() {
 
