@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cert UPB 2023</string>
+    <string name="login_options_message">Welcome to your <b>online publicity!</b></string>
+    <string name="login_options_continue_with">To continue, it is required to login:</string>
+    <string name="login_options_button">Continue with email</string>
+    <string name="terms_and_conditions_title">Terms and conditions</string>
+    <string name="terms_and_conditions_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="terms_and_conditions_button_accept">Accept</string>
+    <string name="terms_and_conditions_button_decline">Decline</string>
+    <string name="register_title">Create your account</string>
+    <string name="register_button">Create account</string>
+    <string name="register_hint_username">Username</string>
+    <string name="register_hint_email">Email</string>
+    <string name="register_hint_password">Password</string>
+    <string name="register_hint_password_confirm">Confirm Password</string>
 </resources>

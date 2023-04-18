@@ -8,4 +8,6 @@
     <color name="secondaryVariantNight">#371212</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray01">#E8E8E8</color>
+    <color name="gray09">#393939</color>
 </resources>

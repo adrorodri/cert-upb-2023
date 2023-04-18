@@ -9,6 +9,7 @@
         <item name="colorSecondary">@color/secondaryNight</item>
         <item name="colorSecondaryVariant">@color/secondaryVariantNight</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSurfaceVariant">@color/gray09</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
