@@ -25,20 +25,7 @@ class HomeListAdapter(val itemList: List<HomeListItem>, val onItemClickListener:
     }
 
     override fun onBindViewHolder(holder: HomeListViewHolder, position: Int) {
-        holder.binding.tvItemTitle.text = itemList[position].title
-        Glide.with(holder.itemView).load(itemList[position].coverImageUrl).into(holder.binding.ivItemBackground)
-        Glide.with(holder.itemView).load(itemList[position].logoUrl).circleCrop().into(holder.binding.ivLogo)
-
-        itemList[position].tags.forEach { tag ->
-            val binding = HomeListItemTagBinding.inflate(LayoutInflater.from(holder.itemView.context), holder.binding.lyTags, false)
-            binding.ivTagIcon.setImageResource(when(tag) {
-                Tag.STORE -> R.drawable.ic_store
-                Tag.PETS -> R.drawable.ic_person
-                Tag.JEWELERY -> R.drawable.ic_phone
-            })
-            holder.binding.lyTags.addView(binding.root)
-        }
-
+        holder.binding.homeListItem = itemList[position]
         holder.itemView.setOnClickListener { onItemClickListener(itemList[position]) }
     }
 }

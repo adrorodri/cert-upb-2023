@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="user"
             type="com.upb.certupb2023.login.models.User" />
+        <variable
+            name="confirmPassword"
+            type="java.lang.String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,9 +126,19 @@
                     android:drawableTint="?attr/colorOnSurface"
                     android:hint="@string/register_hint_password_confirm"
                     android:imeOptions="actionDone"
+                    android:text="@={confirmPassword}"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:text="@string/register_wrong_passsword"
+                    android:textColor="#F44336"
+                    android:visibility='@{confirmPassword.equals(user.password) ? View.INVISIBLE : View.VISIBLE}' />
             </LinearLayout>
         </ScrollView>
 
