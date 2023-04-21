@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="?attr/colorSecondary"/>
-    <corners android:radius="40dp"/>
-</shape>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape>
+            <solid android:color="?attr/colorSurfaceVariant"/>
+            <corners android:radius="40dp"/>
+        </shape>
+    </item>
+    <item android:state_enabled="true">
+        <shape>
+            <solid android:color="?attr/colorPrimary"/>
+            <corners android:radius="40dp"/>
+        </shape>
+    </item>
+</selector>
