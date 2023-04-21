@@ -7,6 +7,10 @@
         <variable
             name="homeListItem"
             type="com.upb.certupb2023.mainscreen.models.HomeListItem" />
+
+        <variable
+            name="homeViewModel"
+            type="com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,6 +21,7 @@
         <include
             android:id="@+id/include2"
             layout="@layout/toolbar_collapsed"
+            app:user="@{homeViewModel.user}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

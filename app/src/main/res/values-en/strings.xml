@@ -18,4 +18,5 @@
     <string name="register_toast_password_empty">Password can\'t be empty!</string>
     <string name="register_toast_user_empty">Username or email can\'t be empty!</string>
     <string name="register_wrong_passsword">Passwords don\'t match!</string>
+    <string name="welcome_title">Welcome %s</string>
 </resources>

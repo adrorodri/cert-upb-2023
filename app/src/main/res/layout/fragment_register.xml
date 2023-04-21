@@ -4,13 +4,9 @@
 
     <data>
         <import type="android.view.View"/>
-
         <variable
-            name="user"
-            type="com.upb.certupb2023.login.models.User" />
-        <variable
-            name="confirmPassword"
-            type="java.lang.String" />
+            name="viewModel"
+            type="com.upb.certupb2023.login.fragments.viewmodels.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,7 +62,7 @@
                     android:drawableTint="?attr/colorOnSurface"
                     android:hint="@string/register_hint_username"
                     android:imeOptions="actionNext"
-                    android:text="@={user.username}"
+                    android:text="@={viewModel.user.username}"
                     android:inputType="text"
                     android:maxLines="1"
                     android:padding="10dp" />
@@ -86,7 +82,7 @@
                     android:drawableTint="?attr/colorOnSurface"
                     android:hint="@string/register_hint_email"
                     android:imeOptions="actionNext"
-                    android:text="@={user.email}"
+                    android:text="@={viewModel.user.email}"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:padding="10dp" />
@@ -106,7 +102,7 @@
                     android:drawableTint="?attr/colorOnSurface"
                     android:hint="@string/register_hint_password"
                     android:imeOptions="actionNext"
-                    android:text="@={user.password}"
+                    android:text="@={viewModel.user.password}"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:padding="10dp" />
@@ -126,7 +122,7 @@
                     android:drawableTint="?attr/colorOnSurface"
                     android:hint="@string/register_hint_password_confirm"
                     android:imeOptions="actionDone"
-                    android:text="@={confirmPassword}"
+                    android:text="@={viewModel.confirmPassword}"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:padding="10dp" />
@@ -138,7 +134,7 @@
                     android:layout_margin="20dp"
                     android:text="@string/register_wrong_passsword"
                     android:textColor="#F44336"
-                    android:visibility='@{confirmPassword.equals(user.password) ? View.INVISIBLE : View.VISIBLE}' />
+                    android:visibility='@{viewModel.confirmPassword.equals(viewModel.user.password) ? View.INVISIBLE : View.VISIBLE}' />
             </LinearLayout>
         </ScrollView>
 

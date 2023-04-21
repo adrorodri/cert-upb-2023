@@ -1,10 +1,12 @@
 package com.upb.certupb2023.mainscreen
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.upb.certupb2023.databinding.ActivityMainBinding
+import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 

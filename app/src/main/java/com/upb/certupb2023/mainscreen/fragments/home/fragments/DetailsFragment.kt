@@ -9,10 +9,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentDetailsBinding
+import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 import com.upb.certupb2023.mainscreen.models.Tag
 
 class DetailsFragment: Fragment() {
@@ -21,12 +24,16 @@ class DetailsFragment: Fragment() {
     val args: DetailsFragmentArgs by navArgs()
     lateinit var binding: FragmentDetailsBinding
 
+    val homeViewModel: HomeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
+        binding.homeViewModel = homeViewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 

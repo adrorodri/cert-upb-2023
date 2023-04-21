@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentListBinding
 import com.upb.certupb2023.mainscreen.fragments.home.adapters.HomeListAdapter
+import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.Tag
 
@@ -18,12 +21,16 @@ class ListFragment : Fragment() {
 
     lateinit var binding: FragmentListBinding
 
+    val homeViewModel: HomeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
+        binding.homeViewModel = homeViewModel
+        binding.lifecycleOwner = this
         return binding.root
     }
 
