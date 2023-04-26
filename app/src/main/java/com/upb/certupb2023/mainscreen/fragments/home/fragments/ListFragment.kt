@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentListBinding
 import com.upb.certupb2023.mainscreen.fragments.home.adapters.HomeListAdapter
+import com.upb.certupb2023.mainscreen.fragments.home.adapters.StoryAdapter
 import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.Tag
@@ -20,6 +21,8 @@ import com.upb.certupb2023.mainscreen.models.Tag
 class ListFragment : Fragment() {
 
     lateinit var binding: FragmentListBinding
+
+    lateinit var storyAdapter: StoryAdapter
 
     val homeViewModel: HomeViewModel by activityViewModels()
 
@@ -35,6 +38,9 @@ class ListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        homeViewModel.getStoryList()
+
         val listItems = listOf(
             HomeListItem(
                 "Elemento 1",
@@ -67,6 +73,16 @@ class ListFragment : Fragment() {
 
         binding.include.btnAccount.setOnClickListener {
             view.findNavController().navigate(R.id.loginActivity)
+        }
+
+        storyAdapter = StoryAdapter(listOf())
+
+        binding.include.rvStories.adapter = storyAdapter
+        binding.include.rvStories.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+        homeViewModel.storyList.observe(viewLifecycleOwner) { newStoryList ->
+            storyAdapter.storyItemList = newStoryList
+            storyAdapter.notifyDataSetChanged()
         }
 
 //        recyclerView.layoutManager = GridLayoutManager(context, 2)
