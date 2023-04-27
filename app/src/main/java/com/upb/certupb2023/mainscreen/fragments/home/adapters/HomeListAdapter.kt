@@ -14,7 +14,7 @@ import com.upb.certupb2023.databinding.HomeListItemTagBinding
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.Tag
 
-class HomeListAdapter(val itemList: List<HomeListItem>, val onItemClickListener: (item: HomeListItem) -> Unit): RecyclerView.Adapter<HomeListViewHolder>() {
+class HomeListAdapter(var itemList: List<HomeListItem>, val onItemClickListener: (item: HomeListItem) -> Unit): RecyclerView.Adapter<HomeListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListViewHolder {
         val binding = HomeListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HomeListViewHolder(binding)
