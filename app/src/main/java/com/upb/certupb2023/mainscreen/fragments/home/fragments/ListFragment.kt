@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -41,7 +42,9 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         homeViewModel.getStoryList()
-        homeViewModel.getStoresList()
+        homeViewModel.getStoresList(requireContext()) {
+            Toast.makeText(requireContext(), "Ocurrio un error", Toast.LENGTH_LONG).show()
+        }
 
         storesAdapter = HomeListAdapter(listOf()){
             // Con SafeArgs (recomendado)
