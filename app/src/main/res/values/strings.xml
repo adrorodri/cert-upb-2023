@@ -19,4 +19,6 @@
     <string name="register_wrong_passsword">Las contraseñas no coinciden!</string>
     <string name="welcome_title">Bienvenid@ %s</string>
     <string name="story_view_offer">Ver Oferta</string>
+    <string name="profile_title">Hey %s, este es tu perfil!</string>
+    <string name="profile_logout">Cerrar sesion</string>
 </resources>

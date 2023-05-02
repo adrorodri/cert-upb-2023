@@ -6,32 +6,46 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.upb.certupb2023.mainscreen.models.HomeListItem
+import com.upb.certupb2023.mainscreen.models.Tag
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import java.lang.reflect.Type
 
 
-class StoresPersistency {
-    val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "stores")
-    val STORE_LIST_KEY = stringPreferencesKey("storeList")
+@Database(entities = [HomeListItem::class], version = 1)
+@TypeConverters(TagConverters::class)
+abstract class StoresPersistency: RoomDatabase() {
 
-    val gson = Gson()
+    abstract fun StoresDao(): StoresDao
 
-    private var stores: List<HomeListItem>? = null
+    companion object {
+        var instance: StoresPersistency? = null
 
-    suspend fun saveStores(context: Context, newList: List<HomeListItem>) {
-        context.dataStore.edit { prefs ->
-            prefs[STORE_LIST_KEY] = gson.toJson(newList)
+        fun getInstance(context: Context): StoresPersistency {
+            if (instance == null) {
+                instance = Room.databaseBuilder(context,
+                    StoresPersistency::class.java,
+                    "StoresDb.db"
+                ).build()
+            }
+            return instance!!
         }
     }
+}
 
-    suspend fun getStores(context: Context): List<HomeListItem>? {
-        val storeListString = context.dataStore.data.first()[STORE_LIST_KEY]
+class TagConverters {
+    @TypeConverter
+    fun tagsToString(tags: List<Tag>): String {
+        return Gson().toJson(tags)
+    }
 
-        val listType: Type = object : TypeToken<List<HomeListItem>>() {}.type
-        return gson.fromJson(storeListString, listType)
+    @TypeConverter
+    fun stringToTags(tagsString: String): List<Tag> {
+        val listType = object : TypeToken<List<Tag>>() {}.type
+        return Gson().fromJson(tagsString, listType)
     }
 }

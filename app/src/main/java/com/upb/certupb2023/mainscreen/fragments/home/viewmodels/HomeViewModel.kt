@@ -9,7 +9,10 @@ import com.upb.certupb2023.data.repositories.StoresRepository
 import com.upb.certupb2023.data.repositories.StoriesRepository
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.StoryItem
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
@@ -26,6 +29,8 @@ class HomeViewModel : ViewModel() {
     val storyList = MutableLiveData<List<StoryItem>>(listOf())
 
     val storesList = MutableLiveData<List<HomeListItem>>(listOf())
+
+    var getAllJob: Job? = null
 
     fun getStoryList() {
         viewModelScope.launch {
@@ -45,9 +50,28 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getStoresList(context: Context, onError: () -> Unit) {
-        viewModelScope.launch {
+        getAllJob = viewModelScope.launch {
             homeRepository.getStoresList(context)
-                .catch { onError() }
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    it.printStackTrace()
+                    onError()
+                }
+                .collect {
+                    storesList.value = it
+                    println(it.toString())
+                }
+        }
+        viewModelScope.launch(Dispatchers.IO) {
+            homeRepository.updateStoreList(context)
+        }
+    }
+
+    fun searchStoreList(context: Context, searchStr: String) {
+        getAllJob?.cancel()
+        viewModelScope.launch {
+            homeRepository.searchStoreList(context, searchStr)
+                .flowOn(Dispatchers.IO)
                 .collect {
                     storesList.value = it
                     println(it.toString())

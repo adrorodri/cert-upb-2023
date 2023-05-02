@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -76,6 +77,10 @@ class ListFragment : Fragment() {
         homeViewModel.storesList.observe(viewLifecycleOwner) { newStoryList ->
             storesAdapter.itemList = newStoryList
             storesAdapter.notifyDataSetChanged()
+        }
+
+        binding.include.editText.addTextChangedListener { newText ->
+            homeViewModel.searchStoreList(requireContext(), newText.toString())
         }
 
 //        recyclerView.layoutManager = GridLayoutManager(context, 2)

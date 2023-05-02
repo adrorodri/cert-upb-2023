@@ -20,4 +20,6 @@
     <string name="register_wrong_passsword">Passwords don\'t match!</string>
     <string name="welcome_title">Welcome %s</string>
     <string name="story_view_offer">View Offer</string>
+    <string name="profile_title">Hey %s, this is your profile!</string>
+    <string name="profile_logout">Logout</string>
 </resources>

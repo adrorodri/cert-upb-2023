@@ -27,6 +27,7 @@ class BindingAdapters {
 
         @JvmStatic @BindingAdapter("addTagViewsFor")
         fun addTagsToView(layout: LinearLayout, homeListItem: HomeListItem) {
+            layout.removeAllViews()
             homeListItem.tags.forEach { tag ->
                 val binding = HomeListItemTagBinding.inflate(LayoutInflater.from(layout.context), layout, false)
                 binding.ivTagIcon.setImageResource(when(tag) {
