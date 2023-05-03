@@ -3,7 +3,7 @@
     <string name="app_name">Cert UPB 2023</string>
     <string name="login_options_message">Welcome to your <b>online publicity!</b></string>
     <string name="login_options_continue_with">To continue, it is required to login:</string>
-    <string name="login_options_button">Continue with email</string>
+    <string name="login_options_register">Register</string>
     <string name="terms_and_conditions_title">Terms and conditions</string>
     <string name="terms_and_conditions_message">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
     <string name="terms_and_conditions_button_accept">Accept</string>
@@ -22,4 +22,11 @@
     <string name="story_view_offer">View Offer</string>
     <string name="profile_title">Hey %s, this is your profile!</string>
     <string name="profile_logout">Logout</string>
+    <string name="my_store_hint_store_name">Store Name:</string>
+    <string name="my_store_hint_address">Address:</string>
+    <string name="my_store_hint_phone">Phone:</string>
+    <string name="my_store_button_update">Update</string>
+    <string name="login_options_login">Login</string>
+    <string name="login_button">Login</string>
+    <string name="login_title">Login</string>
 </resources>

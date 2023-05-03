@@ -42,10 +42,22 @@
         android:layout_margin="20dp"
         android:text="@string/login_options_continue_with"
         android:textColor="?attr/colorOnPrimary"
-        android:textSize="18sp"
+        android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toStartOf="@+id/view2"
         app:layout_constraintTop_toTopOf="@+id/view2" />
+
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/bkg_button"
+        android:text="@string/login_options_login"
+        app:backgroundTint="?attr/colorSecondary"
+        app:layout_constraintBottom_toTopOf="@+id/btContinueWithMail"
+        app:layout_constraintEnd_toEndOf="@id/view2"
+        app:layout_constraintStart_toStartOf="@id/view2" />
 
     <Button
         android:id="@+id/btContinueWithMail"
@@ -53,9 +65,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="@drawable/bkg_button"
-        android:drawableStart="@drawable/ic_email"
-        android:text="@string/login_options_button"
-        app:backgroundTint="@color/secondary"
+        android:text="@string/login_options_register"
+        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/view2"
         app:layout_constraintEnd_toEndOf="@id/view2"
         app:layout_constraintStart_toStartOf="@id/view2" />

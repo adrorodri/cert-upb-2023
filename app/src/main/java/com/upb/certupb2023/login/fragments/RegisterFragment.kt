@@ -18,7 +18,7 @@ import com.upb.certupb2023.databinding.FragmentRegisterBinding
 import com.upb.certupb2023.login.fragments.viewmodels.RegisterViewModel
 import com.upb.certupb2023.login.models.User
 
-class RegisterFragment: Fragment() {
+class RegisterFragment : Fragment() {
     lateinit var binding: FragmentRegisterBinding
 
     val registerViewModel: RegisterViewModel by viewModels()
@@ -40,20 +40,39 @@ class RegisterFragment: Fragment() {
             if (registerViewModel.user.value == null) return@setOnClickListener
 
             if (registerViewModel.user.value!!.username.isEmpty() || registerViewModel.user.value!!.email.isBlank()) {
-                Toast.makeText(context, getString(R.string.register_toast_user_empty), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.register_toast_user_empty),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             if (registerViewModel.user.value!!.password.isEmpty() || registerViewModel.user.value!!.password.isBlank()) {
-                Toast.makeText(context, getString(R.string.register_toast_password_empty), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.register_toast_password_empty),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             if (registerViewModel.user.value!!.password != registerViewModel.confirmPassword.value) {
-                Toast.makeText(context, getString(R.string.register_toast_password_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    getString(R.string.register_toast_password_error),
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
-            registerViewModel.createUser(registerViewModel.user.value!!)
-            activity?.finish()
+            registerViewModel.createUser(requireContext(), registerViewModel.user.value!!, {
+                activity?.finish()
+            }, {
+                Toast.makeText(
+                    requireContext(),
+                    "Ocurrio un error, intenta nuevamente",
+                    Toast.LENGTH_LONG
+                ).show()
+            })
 //            findNavController().popBackStack(R.id.loginOptionsFragment, true)
 //            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToMainActivity())
         }

@@ -2,9 +2,8 @@ package com.upb.certupb2023.data.repositories
 
 import android.content.Context
 import android.net.ConnectivityManager
-import androidx.core.content.ContextCompat.getSystemService
 import com.upb.certupb2023.data.api.ApiClient
-import com.upb.certupb2023.data.persistency.StoresPersistency
+import com.upb.certupb2023.data.persistency.RoomPersistency
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import kotlinx.coroutines.flow.*
 
@@ -13,20 +12,20 @@ class StoresRepository {
     val apiClient = ApiClient()
 
     fun getStoresList(context: Context): Flow<List<HomeListItem>> {
-        val storesPersistency = StoresPersistency.getInstance(context)
-        return storesPersistency.StoresDao().getStores()
+        val roomPersistency = RoomPersistency.getInstance(context)
+        return roomPersistency.StoresDao().getStores()
     }
 
     fun searchStoreList(context: Context, searchStr: String): Flow<List<HomeListItem>> {
-        val storesPersistency = StoresPersistency.getInstance(context)
-        return storesPersistency.StoresDao().searchStores(searchStr)
+        val roomPersistency = RoomPersistency.getInstance(context)
+        return roomPersistency.StoresDao().searchStores(searchStr)
     }
 
     suspend fun updateStoreList(context: Context) {
-        val storesPersistency = StoresPersistency.getInstance(context)
+        val roomPersistency = RoomPersistency.getInstance(context)
         if (isNetworkAvailable(context)) {
             val newList = apiClient.getStoresList().first()
-            storesPersistency.StoresDao().saveStores(newList)
+            roomPersistency.StoresDao().saveStores(newList)
         }
     }
 

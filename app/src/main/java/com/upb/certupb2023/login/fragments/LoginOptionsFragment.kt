@@ -26,5 +26,10 @@ class LoginOptionsFragment : Fragment() {
             view.findNavController()
                 .navigate(LoginOptionsFragmentDirections.actionLoginOptionsFragmentToTermsAndConditionsFragment())
         }
+
+        binding.btLogin.setOnClickListener {
+            view.findNavController()
+                .navigate(LoginOptionsFragmentDirections.actionLoginOptionsFragmentToLoginFragment())
+        }
     }
 }
