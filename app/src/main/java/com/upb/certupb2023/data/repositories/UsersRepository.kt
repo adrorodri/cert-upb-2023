@@ -1,19 +1,32 @@
 package com.upb.certupb2023.data.repositories
 
 import android.content.Context
+import com.upb.certupb2023.data.persistency.AuthPersistency
 import com.upb.certupb2023.data.persistency.RoomPersistency
 import com.upb.certupb2023.login.models.User
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class UsersRepository {
-    fun registrarUsuario(context: Context, user: User) {
+
+    suspend fun registrarUsuario(context: Context, user: User) {
         RoomPersistency.getInstance(context).UsersDao().insertUser(user)
+        AuthPersistency.saveUser(context, user)
     }
 
     fun login(context: Context, username: String, password: String): Flow<User> {
-        return RoomPersistency.getInstance(context).UsersDao().getUser(username, password).map { it.first() }
+        return RoomPersistency.getInstance(context).UsersDao().getUser(username, password)
+            .map { it.first() }
+            .onEach { user -> AuthPersistency.saveUser(context, user) }
+    }
+
+    fun logout(context: Context): Flow<Unit> {
+        return flow {
+            AuthPersistency.removeUser(context)
+        }
+    }
+
+    suspend fun isLoggedIn(context: Context): Boolean {
+        return AuthPersistency.getUser(context)?.first() != null
     }
 
     suspend fun updatePassword(context: Context, username: String, oldPassword: String, newPassword: String) {

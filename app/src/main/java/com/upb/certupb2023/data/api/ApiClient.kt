@@ -9,6 +9,7 @@ import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Url
 
 

@@ -30,7 +30,10 @@ class RegisterViewModel : ViewModel() {
             }
                 .flowOn(Dispatchers.IO)
                 .onEach { onSuccess() }
-                .catch { onError() }
+                .catch {
+                    it.printStackTrace()
+                    onError()
+                }
                 .collect()
         }
     }
@@ -43,7 +46,10 @@ class RegisterViewModel : ViewModel() {
             }
                 .flowOn(Dispatchers.IO)
                 .onEach { onSuccess() }
-                .catch { onError() }
+                .catch {
+                    it.printStackTrace()
+                    onError()
+                }
                 .collect()
         }
     }

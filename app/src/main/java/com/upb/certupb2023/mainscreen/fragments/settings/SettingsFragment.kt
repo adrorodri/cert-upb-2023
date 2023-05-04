@@ -5,10 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentSettingsBinding
+import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
     lateinit var binding: FragmentSettingsBinding
+
+    val homeViewModel: HomeViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -16,5 +27,15 @@ class SettingsFragment : Fragment() {
     ): View? {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btLogout.setOnClickListener {
+            CoroutineScope(Dispatchers.Main).launch {
+                homeViewModel.logout(requireContext()).collect()
+            }
+        }
     }
 }

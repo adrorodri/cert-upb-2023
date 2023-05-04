@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.upb.certupb2023.R
@@ -19,6 +20,12 @@ import com.upb.certupb2023.mainscreen.fragments.home.adapters.StoryAdapter
 import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.Tag
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 class ListFragment : Fragment() {
 
@@ -41,6 +48,12 @@ class ListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val isUserLoggedIn = homeViewModel.isUserLoggedIn(requireContext())
+            if (!isUserLoggedIn) {
+                view.findNavController().navigate(R.id.loginActivity)
+            }
+        }
 
         homeViewModel.getStoryList()
         homeViewModel.getStoresList(requireContext()) {

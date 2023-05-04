@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.upb.certupb2023.TemporalDb
 import com.upb.certupb2023.data.repositories.StoresRepository
 import com.upb.certupb2023.data.repositories.StoriesRepository
+import com.upb.certupb2023.data.repositories.UsersRepository
 import com.upb.certupb2023.mainscreen.models.HomeListItem
 import com.upb.certupb2023.mainscreen.models.StoryItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
@@ -23,6 +25,7 @@ class HomeViewModel : ViewModel() {
 
     val storiesRepository = StoriesRepository()
     val homeRepository = StoresRepository()
+    val usersRepository = UsersRepository()
 
     val user = TemporalDb.observeUser()
 
@@ -77,5 +80,13 @@ class HomeViewModel : ViewModel() {
                     println(it.toString())
                 }
         }
+    }
+
+    suspend fun isUserLoggedIn(context: Context): Boolean {
+        return usersRepository.isLoggedIn(context)
+    }
+
+    fun logout(context: Context): Flow<Unit> {
+        return usersRepository.logout(context)
     }
 }
