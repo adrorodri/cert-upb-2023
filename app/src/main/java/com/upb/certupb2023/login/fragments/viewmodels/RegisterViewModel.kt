@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(val usersRepository: UsersRepository) : ViewModel() {
     init {
         println("RegisterViewModel inicializado!")
     }
@@ -19,13 +19,11 @@ class RegisterViewModel : ViewModel() {
     val user = MutableLiveData(User("", "", ""))
     val confirmPassword = MutableLiveData("")
 
-    val usersRepository = UsersRepository()
-
-    fun createUser(context: Context, user: User, onSuccess: () -> Unit, onError: () -> Unit) {
+    fun createUser(user: User, onSuccess: () -> Unit, onError: () -> Unit) {
 //        TemporalDb.saveUser(user)
         viewModelScope.launch {
             flow {
-                usersRepository.registrarUsuario(context, user)
+                usersRepository.registrarUsuario(user)
                 emit(user)
             }
                 .flowOn(Dispatchers.IO)
@@ -38,10 +36,10 @@ class RegisterViewModel : ViewModel() {
         }
     }
 
-    fun login(context: Context, username: String, password: String, onSuccess: () -> Unit, onError: () -> Unit) {
+    fun login(username: String, password: String, onSuccess: () -> Unit, onError: () -> Unit) {
         viewModelScope.launch {
             flow {
-                val user = usersRepository.login(context, username, password).first()
+                val user = usersRepository.login(username, password).first()
                 emit(user)
             }
                 .flowOn(Dispatchers.IO)

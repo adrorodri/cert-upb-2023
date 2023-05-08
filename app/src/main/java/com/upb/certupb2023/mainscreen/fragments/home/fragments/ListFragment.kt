@@ -26,6 +26,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class ListFragment : Fragment() {
 
@@ -34,7 +35,7 @@ class ListFragment : Fragment() {
     lateinit var storyAdapter: StoryAdapter
     lateinit var storesAdapter: HomeListAdapter
 
-    val homeViewModel: HomeViewModel by activityViewModels()
+    val homeViewModel: HomeViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +50,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         CoroutineScope(Dispatchers.Main).launch {
-            val isUserLoggedIn = homeViewModel.isUserLoggedIn(requireContext())
+            val isUserLoggedIn = homeViewModel.isUserLoggedIn()
             if (!isUserLoggedIn) {
                 view.findNavController().navigate(R.id.loginActivity)
             }
@@ -93,7 +94,7 @@ class ListFragment : Fragment() {
         }
 
         binding.include.editText.addTextChangedListener { newText ->
-            homeViewModel.searchStoreList(requireContext(), newText.toString())
+            homeViewModel.searchStoreList(newText.toString())
         }
 
 //        recyclerView.layoutManager = GridLayoutManager(context, 2)

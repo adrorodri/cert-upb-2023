@@ -1,6 +1,5 @@
 package com.upb.certupb2023.mainscreen.fragments.home.viewmodels
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,14 +17,12 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(val storiesRepository: StoriesRepository,
+                    val storesRepository: StoresRepository,
+                    val usersRepository: UsersRepository) : ViewModel() {
     init {
         println("INIT HomeViewModel")
     }
-
-    val storiesRepository = StoriesRepository()
-    val homeRepository = StoresRepository()
-    val usersRepository = UsersRepository()
 
     val user = TemporalDb.observeUser()
 
@@ -52,9 +49,9 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun getStoresList(context: Context, onError: () -> Unit) {
+    fun getStoresList(onError: () -> Unit) {
         getAllJob = viewModelScope.launch {
-            homeRepository.getStoresList(context)
+            storesRepository.getStoresList()
                 .flowOn(Dispatchers.IO)
                 .catch {
                     it.printStackTrace()
@@ -66,14 +63,14 @@ class HomeViewModel : ViewModel() {
                 }
         }
         viewModelScope.launch(Dispatchers.IO) {
-            homeRepository.updateStoreList(context)
+            storesRepository.updateStoreList()
         }
     }
 
-    fun searchStoreList(context: Context, searchStr: String) {
+    fun searchStoreList(searchStr: String) {
         getAllJob?.cancel()
         viewModelScope.launch {
-            homeRepository.searchStoreList(context, searchStr)
+            storesRepository.searchStoreList(searchStr)
                 .flowOn(Dispatchers.IO)
                 .collect {
                     storesList.value = it
@@ -82,11 +79,11 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    suspend fun isUserLoggedIn(context: Context): Boolean {
-        return usersRepository.isLoggedIn(context)
+    suspend fun isUserLoggedIn(): Boolean {
+        return usersRepository.isLoggedIn()
     }
 
-    fun logout(context: Context): Flow<Unit> {
-        return usersRepository.logout(context)
+    fun logout(): Flow<Unit> {
+        return usersRepository.logout()
     }
 }

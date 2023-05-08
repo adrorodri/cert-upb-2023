@@ -18,11 +18,12 @@ import com.upb.certupb2023.databinding.FragmentLoginBinding
 import com.upb.certupb2023.databinding.FragmentRegisterBinding
 import com.upb.certupb2023.login.fragments.viewmodels.RegisterViewModel
 import com.upb.certupb2023.login.models.User
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
 
-    val registerViewModel: RegisterViewModel by viewModels()
+    val registerViewModel: RegisterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +40,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener {
             registerViewModel.login(
-                requireContext(),
                 binding.etUsername.text.toString(),
                 binding.etPassword.text.toString(), {
                 activity?.finish()

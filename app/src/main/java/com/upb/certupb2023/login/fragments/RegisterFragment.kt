@@ -17,11 +17,12 @@ import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentRegisterBinding
 import com.upb.certupb2023.login.fragments.viewmodels.RegisterViewModel
 import com.upb.certupb2023.login.models.User
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
     lateinit var binding: FragmentRegisterBinding
 
-    val registerViewModel: RegisterViewModel by viewModels()
+    val registerViewModel: RegisterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +65,7 @@ class RegisterFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            registerViewModel.createUser(requireContext(), registerViewModel.user.value!!, {
+            registerViewModel.createUser(registerViewModel.user.value!!, {
                 activity?.finish()
             }, {
                 Toast.makeText(

@@ -8,24 +8,20 @@ import com.upb.certupb2023.mainscreen.models.HomeListItem
 import kotlinx.coroutines.flow.*
 
 
-class StoresRepository {
-    val apiClient = ApiClient()
+class StoresRepository(val context: Context, val apiClient: ApiClient, val roomPersistency: RoomPersistency) {
 
-    fun getStoresList(context: Context): Flow<List<HomeListItem>> {
-        val roomPersistency = RoomPersistency.getInstance(context)
-        return roomPersistency.StoresDao().getStores()
+    fun getStoresList(): Flow<List<HomeListItem>> {
+        return roomPersistency.db.StoresDao().getStores()
     }
 
-    fun searchStoreList(context: Context, searchStr: String): Flow<List<HomeListItem>> {
-        val roomPersistency = RoomPersistency.getInstance(context)
-        return roomPersistency.StoresDao().searchStores(searchStr)
+    fun searchStoreList(searchStr: String): Flow<List<HomeListItem>> {
+        return roomPersistency.db.StoresDao().searchStores(searchStr)
     }
 
-    suspend fun updateStoreList(context: Context) {
-        val roomPersistency = RoomPersistency.getInstance(context)
+    suspend fun updateStoreList() {
         if (isNetworkAvailable(context)) {
             val newList = apiClient.getStoresList().first()
-            roomPersistency.StoresDao().saveStores(newList)
+            roomPersistency.db.StoresDao().saveStores(newList)
         }
     }
 

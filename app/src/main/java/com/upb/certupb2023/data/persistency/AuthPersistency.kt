@@ -10,21 +10,21 @@ import com.upb.certupb2023.login.models.User
 import kotlinx.coroutines.flow.first
 
 
-object AuthPersistency {
+class AuthPersistency(val context: Context) {
     val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "auth")
     val tokenKey = stringPreferencesKey("tokenKey")
 
-    suspend fun saveUser(context: Context, user: User) {
+    suspend fun saveUser(user: User) {
         context.dataStore.edit { prefs ->
             prefs[tokenKey] = user.username
         }
     }
 
-    suspend fun getUser(context: Context): String? {
+    suspend fun getUser(): String? {
         return context.dataStore.data.first()[tokenKey]
     }
 
-    suspend fun removeUser(context: Context) {
+    suspend fun removeUser() {
         context.dataStore.edit { prefs ->
             prefs.remove(tokenKey)
         }

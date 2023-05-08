@@ -14,11 +14,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class SettingsFragment : Fragment() {
     lateinit var binding: FragmentSettingsBinding
 
-    val homeViewModel: HomeViewModel by activityViewModels()
+    val homeViewModel: HomeViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +35,7 @@ class SettingsFragment : Fragment() {
 
         binding.btLogout.setOnClickListener {
             CoroutineScope(Dispatchers.Main).launch {
-                homeViewModel.logout(requireContext()).collect()
+                homeViewModel.logout().collect()
             }
         }
     }

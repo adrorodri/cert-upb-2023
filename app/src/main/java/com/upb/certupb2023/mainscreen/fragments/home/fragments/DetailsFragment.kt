@@ -11,12 +11,14 @@ import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.upb.certupb2023.R
 import com.upb.certupb2023.databinding.FragmentDetailsBinding
 import com.upb.certupb2023.mainscreen.fragments.home.viewmodels.HomeViewModel
 import com.upb.certupb2023.mainscreen.models.Tag
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class DetailsFragment: Fragment() {
 
@@ -24,7 +26,7 @@ class DetailsFragment: Fragment() {
     val args: DetailsFragmentArgs by navArgs()
     lateinit var binding: FragmentDetailsBinding
 
-    val homeViewModel: HomeViewModel by activityViewModels()
+    val homeViewModel: HomeViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
